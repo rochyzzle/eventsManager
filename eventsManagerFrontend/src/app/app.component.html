@@ -122,9 +122,9 @@
                             <div class="10u$ 12u$(xsmall)">
                                 <input type="text" name="local" id="local" value="" placeholder="Local" />
                             </div>
-                            <p>Selecione uma imagem para o evento: </p>
-                            <div class="6u$ 12u$(xsmall)">
-                                <input type="file" name="pic" accept="image/*" id="imagem"/>
+                            <p>Imagem: </p>
+                            <div class="10u$ 12u$(xsmall)">
+                                <input type="text" name="image" id="imagem" value="" placeholder="Imagem"/>
                             </div>
                             <p>Data: </p>
                             <div class="6u$ 12u$(xsmall)">
@@ -134,7 +134,6 @@
                             <div class="12u$">
                                 <div class="select-wrapper">
                                     <select name="categoria" id="categoria">
-                                        <option value="categoria">- Categoria -</option>
                                         <option value="conferencias">Conferências</option>
                                         <option value="seminarios">Seminários</option>
                                         <option value="desportivos">Desportivos</option>
@@ -168,6 +167,79 @@
 
     </section>
     </ng-container>
+
+    <ng-container *ngIf="page === 'edit'">
+        <section id="banner" class="wrapper">
+          <div class="inner">
+              <header class="align-center">
+                  <h2>Criar Evento</h2>
+              </header>
+  
+              <!-- Elements -->
+              <div class="row 200%">
+  
+                  <div class="12u$ 12u$(medium)">
+  
+                      <!-- Form -->
+                      <form>
+                          <div class="row uniform">
+                              <p>Nome: </p>
+                              <div class="10u$ 12u$(xsmall)">
+                                  <input type="text" name="nome" id="editNome" [value]="eventToBeEdited.name" placeholder="Name" />
+                              </div>
+                              <p>Email: </p>
+                              <div class="10u$ 12u$(xsmall)">
+                                  <input type="email" name="email" id="editEmail" [value]="eventToBeEdited.email" placeholder="Email" />
+                              </div>
+                              <p>Local: </p>
+                              <div class="10u$ 12u$(xsmall)">
+                                  <input type="text" name="local" id="editLocal" [value]="eventToBeEdited.local" placeholder="Local" />
+                              </div>
+                              <p>Imagem: </p>
+                              <div class="10u$ 12u$(xsmall)">
+                                  <input type="text" name="image" id="editImagem" [value]="eventToBeEdited.image" placeholder="Imagem"/>
+                              </div>
+                              <p>Data: </p>
+                              <div class="6u$ 12u$(xsmall)">
+                                  <input type="date" name="data" id="editData" [value]="eventToBeEdited.date" />
+                              </div>
+                              <!-- Break -->
+                              <div class="12u$">
+                                  <div class="select-wrapper">
+                                      <select name="categoria" id="editCategoria" [value]="eventToBeEdited.category">
+                                          <option value="conferencias">Conferências</option>
+                                          <option value="seminarios">Seminários</option>
+                                          <option value="desportivos">Desportivos</option>
+                                          <option value="culturais">Culturais</option>
+                                          <option value="workshops">Workshops</option>
+                                      </select>
+                                  </div>
+                              </div>
+  
+                              <!-- Break -->
+                              <div class="12u$">
+                                  <textarea name="descricao" id="editDescricao" placeholder="Escreva uma descrição do evento" rows="6" [value]="eventToBeEdited.description"></textarea>
+                              </div>
+                              <!-- Break -->
+                              <div class="12u$">
+                                  <ul class="actions">
+                                      <li>
+                                          <input type="button" id="criarEvento" value="Editar Evento" (click)="sumbitEdit(eventToBeEdited._id)"/>
+                                      </li>
+                                      <li>
+                                          <input type="reset" value="Cancelar" />
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+  
+          </div>
+  
+      </section>
+      </ng-container>
     
     <ng-container *ngIf="page === 'about'">
       <section id="banner" class="wrapper">
@@ -224,10 +296,44 @@
         <div class="inner">
           <header class="align-center">
             <h2>Eventos</h2>
+            <select name="category" id="category" (change)="applyFilter($event.target.value)">Categorias de Evento
+              <option value="all">Todos</option>
+              <option value="workshops">Workshops</option>
+              <option value="seminarios">Seminários</option>
+              <option value="culturais">Culturais</option>
+              <option value="desportivos">Desportivos</option>
+              <option value="conferencias">Conferências</option>
+            </select>
           </header>
-          <ng-container *ngFor="let event of events">
-            <app-event [event]="event"></app-event>
+
+          <ng-container *ngIf="filter === 'all'; else filtered">
+              <ng-container *ngFor="let event of events">
+                  <div style="border: solid 1px black; word-break: break-all">
+                      <div class="image round left"><img src="{{event.image}}" alt=""></div>
+                      <p>{{event.name}}</p>
+                      <p>{{event.description}}</p>
+                      <button (click)="deleteEvent(event.id)">DELETE></button>
+                      <button (click)="editEvent(event.id)">EDIT></button>
+                    </div>
+                    <br>
+            </ng-container>
           </ng-container>
+          
+          <ng-template #filtered>
+              <ng-container *ngFor="let event of events">
+                  <ng-container *ngIf="event.category === filter">
+                      <div style="border: solid 1px black; word-break: break-all">
+                          <div class="image round left"><img src="{{event.image}}" alt=""></div>
+                          <p>{{event.name}}</p>
+                          <p>{{event.description}}</p>
+                          <button (click)="deleteEvent(event.id)">DELETE></button>
+                          <button (click)="editEvent(event.id)">EDIT></button>
+                        </div>
+                        <br>
+                  </ng-container>
+            </ng-container>
+          </ng-template>
+          
         </div>
       </section>
     </ng-container>
