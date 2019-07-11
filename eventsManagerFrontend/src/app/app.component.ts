@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'eventsManagerFrontend';
+  public page: string = 'initial';
+
+  changePage(page: string) {
+    this.page = page;
+  }
 }

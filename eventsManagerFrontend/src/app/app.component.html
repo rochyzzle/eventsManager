@@ -13,18 +13,20 @@
 		<!-- Header -->
 			<header id="header">
 				<div class="inner">
-					<a href="../html/index.html" class="logo"><img border="0" src="../assets/images/logo-white.png" width="215" height="100"></a>
+					<a (click)="changePage('initial')" class="logo"><img border="0" src="../assets/images/logo-white.png" width="215" height="100"></a>
 					<nav id="nav">
-						<a href="../html/index.html">Página Inicial</a>
-						<a href="../html/criarEvento.html">Criar Evento</a>
-						<a href="../html/sobre.html">Sobre</a>
-						<a href="../html/eventos.html">Eventos</a>
+						<a (click)="changePage('initial')">Página Inicial</a>
+						<a (click)="changePage('create')">Criar Evento</a>
+						<a (click)="changePage('about')">Sobre</a>
+						<a (click)="changePage('events')">Eventos</a>
 					</nav>
 					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 				</div>
 			</header>
 
-		<!-- Banner -->
+
+    <ng-container *ngIf="page === 'initial'">
+<!-- Banner -->
 			<section id="banner">
 				<div class="inner">
 					<header>
@@ -91,6 +93,164 @@
 					</div>
 				</div>
 			</section>
+    </ng-container>
+
+    <ng-container *ngIf="page === 'create'">
+      <section id="banner" class="wrapper">
+        <div class="inner">
+            <header class="align-center">
+                <h2>Criar Evento</h2>
+            </header>
+
+            <!-- Elements -->
+            <div class="row 200%">
+
+                <div class="12u$ 12u$(medium)">
+
+                    <!-- Form -->
+                    <form method="post" action="#">
+                        <div class="row uniform">
+                            <p>Nome: </p>
+                            <div class="10u$ 12u$(xsmall)">
+                                <input type="text" name="nome" id="nome" value="" placeholder="Name" />
+                            </div>
+                            <p>Email: </p>
+                            <div class="10u$ 12u$(xsmall)">
+                                <input type="email" name="email" id="email" value="" placeholder="Email" />
+                            </div>
+                            <p>Local: </p>
+                            <div class="10u$ 12u$(xsmall)">
+                                <input type="text" name="local" id="local" value="" placeholder="Local" />
+                            </div>
+                            <p>Selecione uma imagem para o evento: </p>
+                            <div class="6u$ 12u$(xsmall)">
+                                <input type="file" name="pic" accept="image/*" />
+                            </div>
+                            <p>Data: </p>
+                            <div class="6u$ 12u$(xsmall)">
+                                <input type="date" name="data" id="data" />
+                            </div>
+                            <!-- Break -->
+                            <div class="12u$">
+                                <div class="select-wrapper">
+                                    <select name="categoria" id="categoria">
+                                        <option value="">- Categoria -</option>
+                                        <option value="1">Conferências</option>
+                                        <option value="1">Seminários</option>
+                                        <option value="1">Desportivos</option>
+                                        <option value="1">Culturais</option>
+                                        <option value="1">Workshops</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Break -->
+                            <div class="12u$">
+                                <textarea name="descricao" id="descricao" placeholder="Escreva uma descrição do evento" rows="6"></textarea>
+                            </div>
+                            <!-- Break -->
+                            <div class="12u$">
+                                <ul class="actions">
+                                    <li>
+                                        <input type="submit" id="criarEvento" value="Criar Evento" />
+                                    </li>
+                                    <li>
+                                        <input type="reset" value="Cancelar" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    </ng-container>
+    
+    <ng-container *ngIf="page === 'about'">
+      <section id="banner" class="wrapper">
+        <div class="inner">
+          <header class="align-center">
+            <h2>Sobre</h2>
+          </header>
+          <div class="image round left">
+            <img src="../images/pic01.jpg" alt="Pic 01" />
+          </div>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+            quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
+            nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
+            numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
+            eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
+            quo voluptas nulla pariatur?</p>
+    
+          <div class="image round right">
+            <img src="../images/pic02.jpg" alt="Pic 02" />
+          </div>
+          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
+            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia
+            deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam
+            libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus,
+            omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus
+            saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente
+            delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+    
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+            quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
+            nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
+            numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
+            eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
+            quo voluptas nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+            deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt
+            in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita
+            distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat
+            facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis
+            aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum
+            hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores
+            repellat.
+          </p>
+    
+        </div>
+      </section>
+    </ng-container>
+
+    <ng-container *ngIf="page === 'events'">
+      <section id="banner" class="wrapper">
+        <div class="inner">
+          <header class="align-center">
+            <h2>Eventos</h2>
+          </header>
+          <div class="image round left">
+            <img src="../images/pic01.jpg" alt="Pic 01" />
+          </div>
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+            ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+            quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi
+            nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
+            numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel
+            eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat
+            quo voluptas nulla pariatur?</p><br>
+    
+          <div class="image round left">
+            <img src="../images/pic02.jpg" alt="Pic 02" />
+          </div>
+          <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti
+            quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia
+            deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam
+            libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus,
+            omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus
+            saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente
+            delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+        </div>
+      </section>
+    </ng-container>
+		
 
 		<!-- Footer -->
 			<footer id="footer">
