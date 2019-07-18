@@ -1,0 +1,19 @@
+version: "3"
+services:
+  web:
+    build: .
+    command: nodemon start
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    environment:
+      MONGO_URL: mongodb://mongo:27017/events_management
+      NODE_ENV: development
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
